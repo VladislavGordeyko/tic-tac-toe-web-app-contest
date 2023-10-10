@@ -34,7 +34,7 @@ Before diving into the setup, make sure you have the following:
 
 ## Getting Started
 
-Navigate to the location where you want your local copy to reside. Clone this repo
+Choose a location on your machine for your local copy. Clone the repo using:
 ```bash
 git clone https://github.com/VladislavGordeyko/tic-tac-toe-web-app-contest.git
 ```
