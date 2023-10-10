@@ -8,8 +8,11 @@ const { TOKEN, WEBHOOK } = env;
 // Initializing the Telegram bot.
 const bot = new TelegramBot(TOKEN, botOptions);
 
-// Setting up the webhook for the bot.
-bot.setWebHook(`${WEBHOOK}/bot${TOKEN}`);
+// If polling on then we dont need webhook
+if (!botOptions.polling) {
+  // Setting up the webhook for the bot.
+  bot.setWebHook(`${WEBHOOK}/bot${TOKEN}`);
+}
 
 // Registering a command handler for the '/start' command.
 bot.onText(/\/start/, startGameCommand(bot));
