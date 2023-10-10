@@ -1,0 +1,28 @@
+.button {
+    border: 1px solid var(--tg-theme-link-color, #4B87BB);
+    background-color: inherit;
+    color: var(--tg-theme-link-color, #4B87BB);
+    width: 100%;
+    padding: 10px;
+    border-radius: 7px;
+    font-weight: 500;
+    font-family: Roboto;
+    font-size: 18px;
+    text-transform: uppercase;
+    transition: background-color 0.2s, color 0.2s, transform 0.3s;
+
+    &:active {
+        background-color: var(--tg-theme-link-color, #4B87BB);
+        color: white;
+        transform: scale(0.95);
+    }
+
+    &:disabled {
+        color: gray;
+        border-color: gray;
+        cursor: not-allowed;
+        background-color: inherit;
+        transition: none;
+        transform: none;
+    }
+}

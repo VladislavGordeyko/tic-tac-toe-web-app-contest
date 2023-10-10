@@ -1,0 +1,28 @@
+.wrapper {
+    justify-content: end;
+    display: flex;
+    cursor: pointer;
+    font-size: 12px;
+  
+    .icon {
+      background-color: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      overflow: hidden;
+      opacity: .5;
+    }
+    
+  .message {
+    opacity: 0;
+    position: absolute;
+    font-size: 10px;
+    text-align: center;
+    width: 90%;
+  }
+}

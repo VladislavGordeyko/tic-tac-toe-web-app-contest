@@ -1,0 +1,22 @@
+.game-status {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0;
+    font-size: 15px;
+
+    &__cards {
+        display: flex;
+        align-items: center;
+        color: var(--tg-theme-text-color);
+    }
+
+    &__text {
+        text-align: center;
+        color: var(--tg-theme-text-color);
+        margin-top: 5px;
+        margin-bottom: 15px;
+        font-size: 17px;
+    }
+}

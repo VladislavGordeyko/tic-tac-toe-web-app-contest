@@ -1,0 +1,33 @@
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    font-family: Roboto, sans-serif;
+
+    &__title {
+        font-size: 45px;   
+        flex: .7;
+        align-items: center;
+        display: flex;
+        font-family: 'Quicksand', sans-serif;
+        color: var(--tg-theme-text-color);
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        padding: 30px;
+        gap: 50px;
+        flex: 1;
+    }
+
+    &__play-vs-friends {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+   
+}

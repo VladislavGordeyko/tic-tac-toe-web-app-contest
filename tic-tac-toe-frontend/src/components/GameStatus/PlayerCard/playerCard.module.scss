@@ -1,0 +1,66 @@
+.player-card {
+    height: 100px;
+    margin-right: 5px;
+    margin-left: 5px;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    &__image-container {
+        border-radius: 58px;
+        height: 58px;
+        width: 58px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        &--active {
+            box-shadow: 0 0 0 2px var(--tg-theme-link-color, #49ACEA);
+        }
+    }
+
+    &__image-fill {
+        background-color: #84CAFE;
+        border-radius: 50px;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__image {
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+    }
+
+    &__image-mock {
+        border-radius: 50px;
+        background-color: #84CAFE;
+    }
+
+    &__name {
+        color: var(--tg-theme-text-color);
+        font-size: 16px;
+    }
+
+    &__score {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border-radius: 20px;
+        background-color: var(--tg-theme-link-color, #49ACEA);
+        position: absolute;
+        font-size: 10px;
+        bottom: -3px;
+        right: -3px;
+        border: 2px solid rgba(255,255,255, 1);
+    }
+}

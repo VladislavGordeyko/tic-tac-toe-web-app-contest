@@ -1,0 +1,32 @@
+.circle {
+    width: 100%;
+    max-height: 20vh;
+    transform-origin: center;
+    stroke: var(--tg-theme-link-color, black);
+    stroke-width: 2;
+    fill: none;
+}
+
+.square {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    color: inherit;
+    background-color: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+
+    &:first-child {
+        border-right: 1px solid gray;
+    }
+    &:last-child {
+        border-left: 1px solid gray;
+    }
+
+    &__container {
+        width: 100%;
+        max-height: 20vh;
+    }
+}
