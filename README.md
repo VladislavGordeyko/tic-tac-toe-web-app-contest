@@ -2,6 +2,8 @@
 
 Welcome to the Tic Tac Toe game integrated with the Telegram Web App! This project is more than just a game; it demonstrates the synergy between web sockets and the Telegram Web App features, illustrating the potential of real-time applications in our digitally connected age.
 
+[@tictactoe_webapp_bot](https://t.me/tictactoe_webapp_bot) - a link to production bot where you can test it
+
 ## Why Tic Tac Toe?
 
 Tic Tac Toe is a clear and comprehensible example, allowing novice and seasoned developers to grasp the underlying technologies without being overwhelmed. But the horizon doesn't stop here. By harnessing the power of web sockets with the Telegram Web APP, a myriad of applications can be realized:
@@ -19,6 +21,9 @@ The combination of websockets for real-time communication and the Telegram Web A
 - [Getting Started](#getting-started)
     - [Telegram Bot](#telegram-bot)
 - [Running Locally](#running-locally)
+- [Architecture](#architecture)
+    - [Backend](#backend-1)
+    - [Frontend](#frontend-1)
 - [Deployment](#deployment)
 - [Contribute](#contribute)
 
@@ -157,9 +162,181 @@ This will start your server, typically on `http://localhost:3000`.
 
 And now you ready to go!
 
+## Architecture
+### Backend
+
+The backend of the Tic Tac Toe application has been crafted using a blend of modern technologies, including Node.js, TypeScript, Express, Websockets, and the node-telegram-bot-api. The structure of the backend is designed for modularity, scalability, and clear division of responsibilities.
+
+### Directory Structure
+
+```
+src
+|-- routes
+|-- telegramBot
+|-- websockets
+config.ts
+index.ts
+```
+
+### 1. Routes
+
+The `routes` folder contains the regular routes for the Express server. It controls the API of the server, typically utilized when there's a need to send some data from the client and execute certain actions, for instance, initiating a game invite.
+
+### 2. Telegram Bot
+
+The `telegramBot` directory consists of several files, including:
+
+- **apiCommands**: This handles commands originating from the routes. A prime example is the `sendMessageToTgChat` function, which gets activated when the client dispatches a POST request to the `/inviteToGame` route. Thus, this module is more about the interaction between the client and the Telegram API.
+  
+- **chatCommands**: The logic for handling bot commands is in this file. It primarily deals with the backend's communication with the Telegram API.
+
+- **constants & models**: These files contain constants related to the bot's operations and data models, respectively.
+
+- **index**: This is the central file where the Telegram bot is initialized and used across the application. It currently processes the `/start` command. However, if developers intend to introduce more commands, they must be added here.
+
+The `telegramBot` folder, in essence, facilitates both inbound and outbound communications with the Telegram API, making interactions seamless.
+
+### 3. Websockets
+
+The `websockets` directory is an essential component of the backend, facilitating real-time communications. Its structure includes:
+
+- **ws**: The main file where websockets are initialized. It handles messages from the client and connection terminations. The system keeps track of connected clients in an array and maintains their sessions.
+
+- **handlers**: This file handles various types of message events, such as `CREATE_SESSION`, `JOIN_SESSION`, `MOVE`, and `RESTART_GAME`. Additionally, it manages connection closures. Whenever a new websocket case is to be added, it must be incorporated into this file.
+
+- **session & game**: The `session` file houses all the logic related to sessions. Conversely, the `game` file focuses on the game's core logic. Depending on the type of websocket message, the appropriate logic from either of these files gets triggered.
+
+- **error**: Dedicated to managing websocket errors, ensuring that they're properly handled and don't disrupt the application's operations.
+
+- **utils**: Contains utility functions that support websocket operations.
+
+By adhering to this organized structure, the backend remains adaptable, allowing for easy updates and expansions in the future.
+
+
+### Frontend
+
+The frontend of the Tic Tac Toe application is designed using Next.js and TypeScript, embodying the modern development practices for scalability and efficiency.
+
+### Directory Structure
+
+```
+src
+|-- components
+|-- context
+|-- entities
+|-- pages
+|-- services
+|-- styles
+```
+
+### 1. Components
+
+The `components` folder houses React components, which are the building blocks of the application. The convention for structuring each component is as follows:
+
+- **Component Name Folder**: For every component, a dedicated folder is created, named after the component.
+  - **index.tsx**: This is the primary file, containing the main logic of the component.
+  - **models.ts**: Contains all the interfaces and types that are pertinent to the component.
+  - **componentName.module.scss**: This is dedicated to the component-specific styling.
+
+### 2. Context
+
+The `context` directory is instrumental in managing the application-wide state. It currently encapsulates:
+
+- **WebSocketContext**: This context simplifies the use of websockets across various components. For instance, both the Lobby and Game components employ this context for real-time operations.
+
+### 3. Entities
+
+The `entities` folder is dedicated to declaring interfaces and types, which provides a strong typing system. This approach ensures code consistency and robustness by allowing type-checking during the development phase.
+
+### 4. Pages
+
+Adhering to the typical Next.js framework structure, the `pages` directory contains the application's routes:
+
+- **index.tsx**: This is the main route, where the core logic of the entire application resides. It serves as the starting point when a user accesses the application.
+
+### 5. Services
+
+Located in the `services` folder, the utilities for API calls are placed here. These services handle communication with the backend, facilitating data transfer and real-time synchronization.
+
+### 6. Styles
+
+The `styles` directory is dedicated to the global styling of the application. Unlike the component-specific styles, this folder contains style definitions that apply to the application as a whole or reusable styles.
+
+---
+
+The frontend architecture, constructed on the Next.js framework, ensures a seamless user experience by efficiently leveraging components, contexts, and services. With a clean structure and organized codebase, future modifications and expansions can be easily integrated.
+
+
 ## Deployment
 
-**Backend & Frontend**: Both folders need to be deployed separately. Depending on your deployment platform (like Vercel, Netlify, Heroku, etc.), the steps may vary. Always refer to the platform's specific documentation for deploying Node.js applications and Next.js applications.
+**Backend & Frontend**: Both the backend and frontend directories need to be deployed separately. While the steps provided below offer general guidelines for deployment on Heroku (backend) and Vercel (frontend), it's crucial to always refer to the platform's specific documentation for any platform-specific intricacies.
+
+### Deploying Backend on Heroku
+
+1. **Setup Heroku CLI**: If you haven't already, install the Heroku CLI by following the instructions on [Heroku's official documentation](https://devcenter.heroku.com/articles/heroku-cli).
+
+2. **Login to Heroku**:
+    ```bash
+    heroku login
+    ```
+
+3. **Initialize a Git Repository** (if not already done):
+    ```bash
+    git init
+    ```
+
+4. **Create a New Heroku App**:
+    ```bash
+    heroku create [app-name]
+    ```
+
+5. **Add a Procfile to main folder**:
+    ```bash
+    web: node dist/index.js
+    ```
+
+6. **Add and Commit Your Changes**:
+    ```bash
+    git add .
+    git commit -m "Initial Heroku deploy"
+    ```
+
+7. **Push to Heroku**:
+    ```bash
+    git push heroku master
+    ```
+
+8. Ensure you have all the necessary environment variables set on Heroku (similar to the `.env` file you might have locally). You can set them in the Heroku dashboard under the "Settings" tab or use the CLI.
+
+9. Once deployed, you can open your app with:
+    ```bash
+    heroku open
+    ```
+
+### Deploying Frontend on Vercel
+
+1. **Install Vercel CLI**:
+    ```bash
+    npm i -g vercel
+    ```
+
+2. **Login to Vercel**:
+    ```bash
+    vercel login
+    ```
+
+3. **Deploy**:
+   Navigate to your frontend directory, then run:
+    ```bash
+    vercel
+    ```
+
+4. Follow the on-screen prompts. If asked, choose to link to an existing project or create a new one.
+
+5. Ensure you have all necessary environment variables set up in Vercel (similar to the `.env` file you might have locally). You can set them in the Vercel dashboard under the "Settings" tab of your project.
+
+6. Once deployed, Vercel will provide you with a live URL to access your application.
+
 
 ## Contribute
 
