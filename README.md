@@ -4,6 +4,15 @@ Welcome to the Tic Tac Toe game integrated with the Telegram Web App! This proje
 
 [@tictactoe_webapp_bot](https://t.me/tictactoe_webapp_bot) - a link to production bot where you can test it
 
+Screenshots:
+
+<div>
+  <img src="./assets/screenshot_start_game_in_group.PNG" width="24%" alt='Lunch screen' />
+  <img src="./assets/game_start.PNG" width="24%" /> 
+  <img src="./assets/game_winner.PNG" width="24%" />
+  <img src="./assets/game_draw.PNG" width="24%" />
+</div>
+
 ## Why Tic Tac Toe?
 
 Tic Tac Toe is a clear and comprehensible example, allowing novice and seasoned developers to grasp the underlying technologies without being overwhelmed. But the horizon doesn't stop here. By harnessing the power of web sockets with the Telegram Web APP, a myriad of applications can be realized:
